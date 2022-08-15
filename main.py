@@ -1,3 +1,4 @@
+#
 from tickets import *
 from printing import *
 from utils import *
@@ -14,8 +15,11 @@ check_space = True
 search = True
 admin_action = True
 
+# this function is too big. need to break it down by functionality
+# for example for each action call a function
 while True:
     while check_space:
+
         startmessage()  # prints message
         check_space = ParkingLot.current_free_space(my_parking)
         ParkingLot.print_free_space(my_parking)
