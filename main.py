@@ -1,3 +1,11 @@
+# Program works very well
+# it is written in a good manner
+# good modules and classes
+# very clear and intuitive.
+# you need to break the code to more functions.
+# make it more efficient by using dictionary , and avoid double code
+# overall - great work! well done!
+
 from tickets import *
 from printing import *
 from utils import *
@@ -14,8 +22,11 @@ check_space = True
 search = True
 admin_action = True
 
+# this function is too big. need to break it down by functionality
+# for example for each action call a function
 while True:
     while check_space:
+
         startmessage()  # prints message
         check_space = ParkingLot.current_free_space(my_parking)
         ParkingLot.print_free_space(my_parking)
@@ -37,9 +48,11 @@ while True:
             if car_action == "":
                 break
             else:
+                # why not call keycode instead of car_action
                 my_parking.update_exit_time(car_action)  # updates the exit time and sums up the bill
                 my_parking.print_bill(car_action)  # prints the bill
                 paying = my_parking.pay_bill(car_action)  # paying the bill
+                # this should be done in the beginning. and include "" check as well.
                 search = my_parking.check_keycode(car_action)
                 if not search:
                     print("Please try again and enter a VALID keycode")
@@ -70,8 +83,8 @@ while True:
                     print("Please try again and enter a valid vehicle number")
                 else:
                     break
-
         if action == "666":  # admin menu
+            # put this admin menu in a seperate function
             while admin_action:
                 admin_choice()
                 admin_action = input("\nYour choice: ")
@@ -113,6 +126,8 @@ while True:
             continue
 
     # menu for when the parking lot is full and no more cars can enter
+    # why do you need a different menu? this is bad because all the code is dobule
+    # think how you can do it in the same menu.
     while not check_space:
         admin_action = True
         search = True
