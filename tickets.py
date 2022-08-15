@@ -52,7 +52,7 @@ class Car:
 
 # creates the parking lot
 class ParkingLot(Car):
-    counter = 1
+    counter = 1 # why is this on the class level? all the rest are object level so this should be too
 
     # adds cars to the parking lots inventory
     def __init__(self, inventory=None):
@@ -83,7 +83,7 @@ class ParkingLot(Car):
     # shows the current free parking spaces
     def current_free_space(self):
         self.free_space = self.parking_spots - ParkingLot.counter + 1
-        if self.free_space == 0:
+        if self.free_space == 0: # what happens if it is smaller than 0?
             # print(f"Currently FREE parking spots: {free_space}")
             return False
         else:
@@ -160,8 +160,11 @@ class ParkingLot(Car):
                       f"\n         Keycode: {i.keycode}")
                 start = i.enter_time
                 end = i.exit_time
-                form = '%H:%M:%S'
+                form = '%H:%M:%S' # put this as a constant  DATE_FORMAT='%H:%M:%S' . it can be in util and you can import it.
+                # you also use it in the exit() and enter(). so make sure all places use it.
                 total_time = (dt.datetime.strptime(end, form) - dt.datetime.strptime(start, form)).seconds / 3600
+                # nice! i would also move this calculation to a different function
+                # i.pay = calculate_price(...)
                 pay1 = self.base_price * 1.25
                 pay2 = self.base_price * 1.5
                 pay3 = self.base_price * 2
@@ -184,6 +187,8 @@ class ParkingLot(Car):
 
     # prints the debit parking_spots
     def print_bill(self, keycode):
+        # if keycode is unique - why not make self.inventory dictionary instead of list.
+        # it will save you the loop just do i = self.inventory[keycode]
         for i in self.inventory:
             if keycode == i.keycode:
                 payment = round(i.pay)
